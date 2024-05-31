@@ -1,0 +1,40 @@
+{
+	"manifest_version": 2,
+	"name": "Web Image Downloader",
+	"version": "0.2",
+
+	"description": "Enables images to be downloaded from pages which otherwise prevent downloading. Currently supports: Pinterest, Instagram, Flickr",
+
+	"icons": {
+		"48": "icons/v2/wid-48.png",
+		"96": "icons/v2/wid-96.png"
+	},
+	
+	"background": {
+	  "scripts": ["background.js"],
+	  "persistent": false,
+	  "type": "module"
+	},
+	
+	"content_scripts": [
+		{
+		  	"matches": ["*://*.pinterest.com/pin/*", "*://*.pinterest.co.uk/pin/*"],
+		  	"js": ["content_pin.js"]
+		}, 
+		{
+			"matches": ["*://*.instagram.com/*"],
+			"js": ["content_insta.js"]
+		},
+		{
+			"matches": ["*://*.flickr.com/photos/*"],
+			"js": ["content_flickr.js"]
+		}
+	],
+
+	"permissions": [
+		"downloads",
+		"tabs",
+		"contextMenus",
+		"clipboardWrite"
+	]
+}
