@@ -23,3 +23,15 @@ browser.scripting.registerContentScripts([SCRIPT_PINT, SCRIPT_INSTA, SCRIPT_FLIC
         console.log("registration complete");
     })
     .catch((err) => console.error(`failed to register content scripts: ${err}`));
+
+
+//     {
+//         "matches": [
+//           "*://*.pinterest.com/*", 
+//           "*://*.pinterest.co.uk/*", 
+//           "*://*.instagram.com/*", 
+//           "*://*.flickr.com/*",
+//           "*://*.artstation.com/*"
+//       ],
+//         "js": ["img_extract.js"]
+//   }

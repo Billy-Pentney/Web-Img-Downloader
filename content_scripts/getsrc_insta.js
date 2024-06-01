@@ -1,7 +1,11 @@
-const TAG = "FLICKR-DOWNLOADER"
+const TAG = "INSTA-DOWNLOADER"
 
+
+function log(msg) {
+	console.log(`${TAG}: ${msg}`);
+}
 function onError(e) {
-	console.log(`Error: ${e}`);
+	console.log(`Error <${TAG}>: ${e}`);
 }
 
 function notifyBackground(message) {
@@ -10,28 +14,28 @@ function notifyBackground(message) {
 					   .catch(onError);
 	}
 	else {
-		onError(`${TAG}: No image url to retrieve`);
+		onError('no image url to return');
 	}
 }
 
 function handleUserAction(message) {
-	console.log(`${TAG}: Content received message`);
+	log(`received request for '${message.command}'`);
 	if (message.command == "extract_image_url") {
 		imageUrl = getImageUrl();
-		console.log(`Got URL ${imageUrl}`)
+		log(`got image URL ${imageUrl}`)
 		message.url = imageUrl
 		notifyBackground(message);
 	}
 	else {
-		onError(`Unknown command: ${message.command}`)
+		onError(`unknown command: ${message.command}`)
 	}
 }
 
-/** Extract the image from the current page */
+/** Extract the image from the current Instagram page */
 function getImageUrl() {
-	imgElement = document.querySelector("img[class='main-photo']");
+	imgElement = document.querySelector("div[style^='padding'] > img[src]");
 	if (!imgElement) {
-		onError("No Instagram images found!")
+		onError("no images found!")
 		return null
 	}
 	imgUrl = imgElement.src

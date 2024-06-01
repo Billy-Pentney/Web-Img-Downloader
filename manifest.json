@@ -1,9 +1,9 @@
 {
 	"manifest_version": 2,
 	"name": "Web Image Downloader",
-	"version": "0.2.1",
+	"version": "0.3",
 
-	"description": "Enables images to be downloaded from pages which otherwise prevent downloading. Currently supports: Pinterest, Instagram, Flickr",
+	"description": "Enables images to be downloaded from pages which otherwise prevent (or discourage) downloading. Currently supports: Pinterest, Instagram, Flickr, Artstation and YouTube thumbnails",
 
 	"icons": {
 		"48": "icons/v2/wid-48.png",
@@ -18,16 +18,20 @@
 
     "content_scripts": [
 		{
-		  	"matches": ["*://*.pinterest.com/*", "*://*.pinterest.co.uk/*"],
-		  	"js": ["content_pin.js"]
-		}, 
-		{
 			"matches": ["*://*.instagram.com/*"],
-			"js": ["content_insta.js"]
+			"js": ["content_scripts/getsrc_insta.js"]
 		},
 		{
 			"matches": ["*://*.flickr.com/*"],
-			"js": ["content_flickr.js"]
+			"js": ["content_scripts/getsrc_flickr.js"]
+		},
+		{
+			"matches": ["*://*.pinterest.com/*", "*://*.pinterest.co.uk/*", "*://*.artstation.com/*"],
+			"js": ["content_scripts/getsrc_simple.js"]
+		},
+		{
+			"matches": ["*://*.youtube.com/*"],
+			"js": ["content_scripts/getsrc_youtube.js"]
 		}
 	],
 

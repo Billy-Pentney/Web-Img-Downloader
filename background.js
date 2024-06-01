@@ -3,8 +3,7 @@ const ACTION_OPEN_TAB = "open_tab"
 const ACTION_DOWNLOAD = "download"
 const ACTION_COPY_TEXT = "copy_text"
 
-var scriptsRegistered = false
-
+let siteName = null
 
 function onMenuItemCreated() {
 	if (browser.runtime.lastError) {
@@ -33,6 +32,11 @@ browser.runtime.onInstalled.addListener(() => {
 	}, onMenuItemCreated);
 });
 
+
+function onError(error) {
+	console.log(error);
+}
+
 // Register the actions in the Right-click context menu
 browser.contextMenus.onClicked.addListener((info, tab) => {
 	switch (info.menuItemId) {
@@ -47,50 +51,52 @@ browser.contextMenus.onClicked.addListener((info, tab) => {
 });
 
 
-
-function onError(error) {
-  console.log(error);
-}
-
 function sendStartMessage(tabs, action) {
     browser.tabs.sendMessage(
 		tabs[0].id, 
 		{ 
 			command: "extract_image_url", 
-			action: action 
+			action: action,
 		}
 	).catch(onError);
 }
 
+
 // Send a message to the Content Script to get the Image URL
-function startContentExtraction(purpose) {
-	browser.tabs.query({currentWindow: true, active : true})
-		.then((tabs) => {sendStartMessage(tabs, purpose)})
+function startContentExtraction(userAction) {
+	browser.tabs.query({ currentWindow: true, active: true })
+		.then((tabs) => { sendStartMessage(tabs, userAction) })
 		.catch(onError);
 }
 
-function handleMessage(request, sender, sendResponse) { 
+
+function handleMessage(message, sender, sendResponse) { 
 	console.log("Received a message from the content")
-	
-	let imageUrl = request.url
-	
-	if (imageUrl) {
-		switch (request.action) {
-			case ACTION_OPEN_TAB:
-				createNewTab(imageUrl);
-				break;
-			case ACTION_DOWNLOAD:
-				downloadImage(imageUrl);
-				break;
-			case ACTION_COPY_TEXT:
-				copyToClipboard(imageUrl);
-				break;
-			default:
-				onError(`Error: Undefined behaviour ${action}`)
+
+	if (message.command == "extract_image_url") {
+		let imageUrl = message.url
+		if (imageUrl) {
+			switch (message.action) {
+				case ACTION_OPEN_TAB:
+					createNewTab(imageUrl);
+					break;
+				case ACTION_DOWNLOAD:
+					downloadImage(imageUrl);
+					break;
+				case ACTION_COPY_TEXT:
+					copyToClipboard(imageUrl);
+					break;
+				default:
+					onError(`undefined behaviour ${action}`)
+			}
 		}
 	}
+	// else if (message.command == "get_site_name") {
+	// 	siteName = message.siteName
+	// 	console.log(`Got sitename: ${siteName}`)
+	// }
 	else {
-		onError("Error: No image url received by background")
+		onError("no image url received by background")
 	}
 }
 
@@ -112,10 +118,24 @@ function copyToClipboard(newClip) {
 			console.log(`Copied url to clipboard`)
 		},
 		() => {
-			onError(`Error: cannot copy to clipboard. Check permissions!`)
+			onError('cannot copy to clipboard. Check permissions!')
 		},
 	);
 }
   
 
 browser.runtime.onMessage.addListener(handleMessage);
+
+
+// var portFromCS;
+
+// function connected(p) {
+// 	portFromCS = p;
+// 	portFromCS.onMessage.addListener(function(m) {
+// 		if(m.location !== undefined){
+// 			console.log(m.location);
+// 		}
+// 	});
+// }
+
+// browser.runtime.onConnect.addListener(connected);

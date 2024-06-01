@@ -10,6 +10,8 @@ Actions:
 * Copy image URL to clipboard
 
 Supported Sites:
-* pinterest.com, pinterest.co.uk
-* instagram.com
-* flickr.com
+* pinterest
+* instagram
+* flickr
+* artstation
+* youtube (thumbnails)

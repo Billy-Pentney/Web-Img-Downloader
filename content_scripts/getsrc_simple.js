@@ -1,8 +1,8 @@
+const TAG = "IMG-GETSRC"
 
-const ACTION_OPEN_TAB = "open_tab"
-const ACTION_DOWNLOAD = "download"
 
-const TAG = "PINTEREST-DOWNLOADER"
+
+
 
 /* On image click, download the image */
 // document.addEventListener("click", (e) => {
@@ -13,8 +13,12 @@ const TAG = "PINTEREST-DOWNLOADER"
 // 	}
 // });
 
+function log(msg) {
+	console.log(`${TAG}: ${msg}`);
+}
+
 function onError(e) {
-	console.log(`Error: ${e}`);
+	console.log(`Error <${TAG}>: ${e}`);
 }
 
 function notifyBackground(message) {
@@ -28,15 +32,16 @@ function notifyBackground(message) {
 }
 
 function handleUserAction(message) {
-	console.log(`${TAG}: Content received message`);
+	log(`received request '${message.command}'`);
+
 	if (message.command == "extract_image_url") {
 		imageUrl = getImageUrl();
-		console.log(`Got URL ${imageUrl}`)
+		log(`got image URL ${imageUrl}`)
 		message.url = imageUrl
 		notifyBackground(message);
 	}
 	else {
-		onError(`Unknown command: ${message.command}`)
+		onError(`unknown command: ${message.command}`)
 	}
 }
 
@@ -45,7 +50,7 @@ function getImageUrl() {
 	img = document.querySelector("div > img[src]");
 	
 	if (!img) {
-		onError(`${TAG}: Could not parse Pinterest image!`);
+		onError(`could not parse image!`);
 		return null
 	}
 
