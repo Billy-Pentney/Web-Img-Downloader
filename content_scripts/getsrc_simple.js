@@ -47,7 +47,7 @@ function handleUserAction(message) {
 
 
 function getImageUrl() {
-	img = document.querySelector("div > img[src]");
+	img = document.querySelector("div > img[src]:not(img[elementtiming])");
 	
 	if (!img) {
 		onError(`could not parse image!`);
