@@ -42,23 +42,14 @@ function handleUserAction(message) {
 
 
 function getImageUrl() {
-	imgScript = document.querySelector("script[data-test-id='leaf-snippet']");
-	imgChild = imgScript.firstChild
+	img = document.querySelector("div > img[src]");
 	
-	if (!imgChild) {
-		onError("No Pinterest images found!");
-		return null
-	}
-	
-	jsonStr = imgChild.data;
-	if (!jsonStr) {
+	if (!img) {
 		onError(`${TAG}: Could not parse Pinterest image!`);
 		return null
 	}
 
-	// Convert element to JSON
-	jsonObj = JSON.parse(jsonStr);
-	return jsonObj.image;
+	return img.src;
 }
 
 

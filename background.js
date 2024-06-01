@@ -3,6 +3,9 @@ const ACTION_OPEN_TAB = "open_tab"
 const ACTION_DOWNLOAD = "download"
 const ACTION_COPY_TEXT = "copy_text"
 
+var scriptsRegistered = false
+
+
 function onMenuItemCreated() {
 	if (browser.runtime.lastError) {
 		onError(browser.runtime.lastError);
@@ -11,26 +14,24 @@ function onMenuItemCreated() {
 	}
 }
 
-
 // Create the Context Menu action(s)
 browser.runtime.onInstalled.addListener(() => {
-  browser.contextMenus.create({
-    id: ACTION_OPEN_TAB,
-    title: "Open Image in New Tab",
-    contexts: ["all"]
-  }, onMenuItemCreated);
-  browser.contextMenus.create({
-    id: ACTION_DOWNLOAD,
-    title: "Save Image As...",
-    contexts: ["all"]
-  }, onMenuItemCreated);
-  browser.contextMenus.create({
-    id: ACTION_COPY_TEXT,
-    title: "Copy Image Link to Clipboard",
-    contexts: ["all"]
-  }, onMenuItemCreated);
+	browser.contextMenus.create({
+		id: ACTION_OPEN_TAB,
+		title: "Open Image in New Tab",
+		contexts: ["all"]
+	}, onMenuItemCreated);
+	browser.contextMenus.create({
+		id: ACTION_DOWNLOAD,
+		title: "Save Image As...",
+		contexts: ["all"]
+	}, onMenuItemCreated);
+	browser.contextMenus.create({
+		id: ACTION_COPY_TEXT,
+		title: "Copy Image Link to Clipboard",
+		contexts: ["all"]
+	}, onMenuItemCreated);
 });
-
 
 // Register the actions in the Right-click context menu
 browser.contextMenus.onClicked.addListener((info, tab) => {
@@ -45,10 +46,11 @@ browser.contextMenus.onClicked.addListener((info, tab) => {
     }
 });
 
+
+
 function onError(error) {
   console.log(error);
 }
-
 
 function sendStartMessage(tabs, action) {
     browser.tabs.sendMessage(
