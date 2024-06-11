@@ -1,16 +1,5 @@
+const TAG = "IMG-GETSRC"
 
-const TAG = "PINTEREST-DOWNLOADER"
-
-
-
-/* On image click, download the image */
-// document.addEventListener("click", (e) => {
-// 	console.log(e.target)
-// 	if (e.target.matches("div[data-test-id='more-options-download'] div[role='button'] div")) {
-// 		console.log("Hit 'download image' button!");
-// 		extractImageUrlAndPerformAction(ACTION_DOWNLOAD);
-// 	}
-// });
 
 function log(msg) {
 	console.log(`${TAG}: ${msg}`);
@@ -44,19 +33,12 @@ function handleUserAction(message) {
 	}
 }
 
+
 function getImageUrl() {
-	imgs = document.querySelectorAll("div[data-test-id='closeup-container'] div > img[src][alt]");
-
-	if (!imgs) {
-		onError("No images found")
-		return null
-	}
-
-	img = imgs.item(imgs.length-1)
-	console.log(img)
+	img = document.querySelector("picture img[src]");
 	
 	if (!img) {
-		onError('Could not parse image!');
+		onError(`could not parse image!`);
 		return null
 	}
 

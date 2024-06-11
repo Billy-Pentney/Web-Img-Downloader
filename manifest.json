@@ -26,12 +26,16 @@
 			"js": ["content_scripts/getsrc_flickr.js"]
 		},
 		{
-			"matches": ["*://*.pinterest.com/*", "*://*.pinterest.co.uk/*", "*://*.artstation.com/*"],
-			"js": ["content_scripts/getsrc_simple.js"]
+			"matches": ["*://*.pinterest.com/*", "*://*.pinterest.co.uk/*"],
+			"js": ["content_scripts/getsrc_pinterest.js"]
 		},
 		{
 			"matches": ["*://*.youtube.com/*"],
 			"js": ["content_scripts/getsrc_youtube.js"]
+		},
+		{
+			"matches": ["*://*.artstation.com/*"],
+			"js": ["content_scripts/getsrc_artstation.js"]
 		}
 	],
 
@@ -39,6 +43,12 @@
 		"downloads",
 		"tabs",
 		"contextMenus",
-		"clipboardWrite"
+		"clipboardWrite",
+		"*://*.pinterest.co.uk/pin/*",
+		"*://*.pinterest.com/pin/*",
+		"*://*.flickr.com/*",
+		"*://*.instagram.com/*",
+		"*://*.artstation.com/*",
+		"*://*.youtube.com/*"
 	]
 }
