@@ -22,7 +22,12 @@
 			"js": ["content_scripts/getsrc_youtube.js"]
 		},
 		{
-			"matches": ["*://*.artstation.com/*", "*://*.flickr.com/*", "*://*.pinterest.com/*", "*://*.pinterest.co.uk/*"],
+			"matches": [
+				"*://*.artstation.com/*", 
+				"*://*.flickr.com/*", 
+				"*://*.pinterest.com/*", "*://*.pinterest.co.uk/*", 
+				"*://*.instagram.com/*"
+			],
 			"js": ["content_scripts/getsrc_any.js"]
 		}
 	],
