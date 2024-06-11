@@ -57,6 +57,7 @@ function sendStartMessage(tabs, action) {
 		{ 
 			command: "extract_image_url", 
 			action: action,
+			siteName: 'artstation'
 		}
 	).catch(onError);
 }
@@ -127,15 +128,17 @@ function copyToClipboard(newClip) {
 browser.runtime.onMessage.addListener(handleMessage);
 
 
-// var portFromCS;
+/// Receive url from get_url.js
 
-// function connected(p) {
-// 	portFromCS = p;
-// 	portFromCS.onMessage.addListener(function(m) {
-// 		if(m.location !== undefined){
-// 			console.log(m.location);
-// 		}
-// 	});
-// }
+var portFromCS;
 
-// browser.runtime.onConnect.addListener(connected);
+function connected(p) {
+  portFromCS = p;
+  portFromCS.onMessage.addListener(function(m) {
+    if(m.location !== undefined){
+      console.log(m.location);
+    }
+  });
+}
+
+browser.runtime.onConnect.addListener(connected);

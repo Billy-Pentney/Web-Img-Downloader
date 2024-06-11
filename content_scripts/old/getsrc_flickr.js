@@ -20,7 +20,7 @@ function notifyBackground(message) {
 function handleUserAction(message) {
 	log(`${TAG}: received message with command '${message.command}'`);
 	if (message.command == "extract_image_url") {
-		imageUrl = getImageUrl();
+		imageUrl = getImageUrlByQuery();
 		log(`Got Image URL ${imageUrl}`)
 		message.url = imageUrl
 		notifyBackground(message);
@@ -31,7 +31,7 @@ function handleUserAction(message) {
 }
 
 /** Extract the image from the current page */
-function getImageUrl() {
+function getImageUrlByQuery() {
 	imgElement = document.querySelector("img[class='main-photo']");
 	if (!imgElement) {
 		onError("no images found!")

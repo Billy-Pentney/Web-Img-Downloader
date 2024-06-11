@@ -34,7 +34,7 @@ function handleUserAction(message) {
 	log(`received request '${message.command}'`);
 
 	if (message.command == "extract_image_url") {
-		imageUrl = getImageUrl();
+		imageUrl = getImageUrlByQuery();
 		log(`got image URL ${imageUrl}`)
 		message.url = imageUrl
 		notifyBackground(message);
@@ -44,7 +44,7 @@ function handleUserAction(message) {
 	}
 }
 
-function getImageUrl() {
+function getImageUrlByQuery() {
 	imgs = document.querySelectorAll("div[data-test-id='closeup-container'] div > img[src][alt]");
 
 	if (!imgs) {

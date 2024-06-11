@@ -18,24 +18,12 @@
 
     "content_scripts": [
 		{
-			"matches": ["*://*.instagram.com/*"],
-			"js": ["content_scripts/getsrc_insta.js"]
-		},
-		{
-			"matches": ["*://*.flickr.com/*"],
-			"js": ["content_scripts/getsrc_flickr.js"]
-		},
-		{
-			"matches": ["*://*.pinterest.com/*", "*://*.pinterest.co.uk/*"],
-			"js": ["content_scripts/getsrc_pinterest.js"]
-		},
-		{
 			"matches": ["*://*.youtube.com/*"],
 			"js": ["content_scripts/getsrc_youtube.js"]
 		},
 		{
-			"matches": ["*://*.artstation.com/*"],
-			"js": ["content_scripts/getsrc_artstation.js"]
+			"matches": ["*://*.artstation.com/*", "*://*.flickr.com/*", "*://*.pinterest.com/*", "*://*.pinterest.co.uk/*"],
+			"js": ["content_scripts/getsrc_any.js"]
 		}
 	],
 
