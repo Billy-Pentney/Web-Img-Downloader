@@ -1,0 +1,10 @@
+{
+    "version": { 
+        "license": "MPL-2.0",
+        "release_notes": {
+            "en-US": " Version 1.0"
+        }
+    },
+    "categories": { "firefox": ["photos-music-videos", "download-management"] },
+    "requires_payment": false
+}
