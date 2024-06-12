@@ -9,6 +9,7 @@ const INSTAGRAM = 'instagram'
 const FLICKR = 'flickr'
 const ARTSTATION = 'artstation'
 const DEVIANTART = 'deviantart'
+const YOUTUBE = 'youtube'
 
 const PINTEREST_QUERY = "div[data-test-id='closeup-container'] div > img[src][alt]";
 const INSTAGRAM_QUERY = "div[style^='padding'] > img[src]";
@@ -17,15 +18,15 @@ const FLICKR_QUERY = "img[class='main-photo']";
 const ARTSTATION_QUERY = "picture img[src]";
 const DEVIANTART_QUERY = "img[src][fetchpriority='high']"
 
-SITE2QUERY_MAP = {
-	DEVIANTART: DEVIANTART_QUERY,
-	ARTSTATION: ARTSTATION_QUERY,
-	FLICKR: FLICKR_QUERY
-}
+// SITE2QUERY_MAP = {
+// 	DEVIANTART: DEVIANTART_QUERY,
+// 	ARTSTATION: ARTSTATION_QUERY,
+// 	FLICKR: FLICKR_QUERY
+// }
 
 // Extracts the desired sitename from the current URL
 const VALID_SITES = [
-	INSTAGRAM, FLICKR, ARTSTATION, PINTEREST, DEVIANTART
+	INSTAGRAM, FLICKR, ARTSTATION, PINTEREST, DEVIANTART, YOUTUBE
 ]
 const NAME_REGEX = VALID_SITES.join("|")
 const SITE_NAME_REGEX = new RegExp(`https:\/\/.*(${NAME_REGEX})\..*`)
@@ -131,6 +132,9 @@ function extractImageUrl(siteName) {
 		case DEVIANTART:
 			imgUrl = getFirstImageUrl(DEVIANTART_QUERY);
 			break;
+		case YOUTUBE:
+			imgUrl = getYoutubeThumbnailUrl()
+			break;
 		default:
 			onError(`Unsupported site-name \'${siteName}\'`)
 			break;
@@ -162,6 +166,39 @@ function getInstagramImageUrl() {
 	
 	return imgUrl
 }
+
+
+
+
+/**
+ * Gets the url of the thumbnail for the current YouTube video, using its video-id.
+ * @returns A url to the thumbnail if successful; or null otherwise.
+ */
+function getYoutubeThumbnailUrl() {
+    const ytUrlRegex = /.*\/watch\?v=(?<id>[^&]*)(?:&list=(?<pl>[^&]*)(&index=(?<ind>\d*))?)?/
+    let url = document.URL
+	
+    log(`Analysing url ${url}`)
+
+    let match = url.match(ytUrlRegex)
+    if (!match) {
+		onError("URL did not match expected format")
+    	return null;
+	}
+
+	id = match.groups.id
+	playlist = match.groups.pl
+	// Index in playlist
+	index = match.groups.index
+
+	log(`Got YT VideoID=${id}, PlaylistID=${playlist}, Index=${index}`)
+
+	// Generate the thumbnail link from the video id
+	src = `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`
+	return src;    
+}
+
+
 
 
 /**
