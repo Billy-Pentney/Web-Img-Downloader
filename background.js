@@ -56,8 +56,7 @@ function sendStartMessage(tabs, action) {
 		tabs[0].id, 
 		{ 
 			command: "extract_image_url", 
-			action: action,
-			siteName: 'artstation'
+			action: action
 		}
 	).catch(onError);
 }
@@ -92,10 +91,6 @@ function handleMessage(message, sender, sendResponse) {
 			}
 		}
 	}
-	// else if (message.command == "get_site_name") {
-	// 	siteName = message.siteName
-	// 	console.log(`Got sitename: ${siteName}`)
-	// }
 	else {
 		onError("no image url received by background")
 	}
@@ -126,19 +121,3 @@ function copyToClipboard(newClip) {
   
 
 browser.runtime.onMessage.addListener(handleMessage);
-
-
-/// Receive url from get_url.js
-
-var portFromCS;
-
-function connected(p) {
-  portFromCS = p;
-  portFromCS.onMessage.addListener(function(m) {
-    if(m.location !== undefined){
-      console.log(m.location);
-    }
-  });
-}
-
-browser.runtime.onConnect.addListener(connected);
