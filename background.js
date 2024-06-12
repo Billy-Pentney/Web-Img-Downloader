@@ -52,13 +52,13 @@ browser.contextMenus.onClicked.addListener((info, tab) => {
 
 
 function sendStartMessage(tabs, action) {
-    browser.tabs.sendMessage(
-		tabs[0].id, 
-		{ 
-			command: "extract_image_url", 
-			action: action
-		}
-	).catch(onError);
+	let message = { 
+		command: "get_image_url", 
+		return_action: action
+	}
+
+    browser.tabs.sendMessage(tabs[0].id, message)
+				.catch(onError);
 }
 
 
@@ -73,7 +73,7 @@ function startContentExtraction(userAction) {
 function handleMessage(message, sender, sendResponse) { 
 	console.log("Received a message from the content")
 
-	if (message.command == "extract_image_url") {
+	if (message.command == "get_image_url") {
 		let imageUrl = message.url
 		if (imageUrl) {
 			switch (message.action) {

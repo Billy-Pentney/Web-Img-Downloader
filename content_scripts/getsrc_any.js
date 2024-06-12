@@ -60,16 +60,22 @@ function notifyBackground(message) {
  * @param {object} message 
  */
 function handleUserAction(message) {
-	if (message.command == "extract_image_url") {
+	if (message.command == "get_image_url") {
 		let url = window.location.href;
 
 		console.log(`${TAG}: Received image-find request for ${url}`);
 		siteName = getSiteName(url)
 		imageUrl = extractImageUrl(siteName);
 
+		let return_message = {
+			sitename: siteName,
+			url: imageUrl,
+			action: message.return_action,
+			command: message.command
+		}
+
 		console.log(`Got URL ${imageUrl}`)
-		message.url = imageUrl;
-		notifyBackground(message);
+		notifyBackground(return_message);
 	}
 	else {
 		onError(`Unknown command: ${message.command}`)
