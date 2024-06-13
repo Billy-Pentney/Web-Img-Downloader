@@ -14,23 +14,21 @@ function onMenuItemCreated() {
 }
 
 // Create the Context Menu action(s)
-browser.runtime.onInstalled.addListener(() => {
-	browser.contextMenus.create({
-		id: ACTION_OPEN_TAB,
-		title: "Open Image in New Tab",
-		contexts: ["all"]
-	}, onMenuItemCreated);
-	browser.contextMenus.create({
-		id: ACTION_DOWNLOAD,
-		title: "Save Image As...",
-		contexts: ["all"]
-	}, onMenuItemCreated);
-	browser.contextMenus.create({
-		id: ACTION_COPY_TEXT,
-		title: "Copy Image Link to Clipboard",
-		contexts: ["all"]
-	}, onMenuItemCreated);
-});
+browser.contextMenus.create({
+	id: ACTION_OPEN_TAB,
+	title: "Open Image in New Tab",
+	contexts: ["all"]
+}, onMenuItemCreated);
+browser.contextMenus.create({
+	id: ACTION_DOWNLOAD,
+	title: "Save Image As...",
+	contexts: ["all"]
+}, onMenuItemCreated);
+browser.contextMenus.create({
+	id: ACTION_COPY_TEXT,
+	title: "Copy Image Link to Clipboard",
+	contexts: ["all"]
+}, onMenuItemCreated);
 
 
 function onError(error) {

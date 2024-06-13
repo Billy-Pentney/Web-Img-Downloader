@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Web Image Downloader",
-	"version": "1.0",
+	"version": "1.1",
 
 	"description": "Enables images to be downloaded from pages which otherwise prevent (or discourage) downloading. Currently supports: Pinterest, Instagram, Flickr, Artstation, DeviantArt, and YouTube thumbnails",
 
