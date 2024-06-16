@@ -1,17 +1,19 @@
 ## Web-Image-Downloader
 
-A basic Firefox Web-Extension which re-enables downloading of images from image-hosting sites, such as Pinterest and Instagram.
+A basic Firefox Web-Extension which re-enables downloading of images from selected image-hosting sites, such as Pinterest and Instagram.
 
-Right-click on any page which features a main central image to see the available actions.
+When viewing a page which features a main central image, right-click to see the available actions.
 
 Actions:
 * Open the image in a new tab
-* Initiate 'Save Image As...'
-* Copy image URL to clipboard
+* Save Image (download)
+* Copy URL of image to the clipboard
 
 Supported Sites:
-* pinterest
-* instagram
-* flickr
-* artstation
-* youtube (thumbnails)
+* Pinterest
+* Instagram
+* Flickr
+* ArtStation
+* DeviantArt
+* YouTube (thumbnails)
+* WorldTattooGallery

@@ -10,6 +10,7 @@ const FLICKR = 'flickr'
 const ARTSTATION = 'artstation'
 const DEVIANTART = 'deviantart'
 const YOUTUBE = 'youtube'
+const WTG = 'worldtattoogallery'
 
 const PINTEREST_QUERY = "div[data-test-id='closeup-container'] div > img[src][alt]";
 const INSTAGRAM_QUERY = "div[style^='padding'] > img[src]";
@@ -17,16 +18,11 @@ const INSTAG_REEL_THUMB_QUERY = "div:not([id='splash-screen']) > img[src]"
 const FLICKR_QUERY = "img[class='main-photo']";
 const ARTSTATION_QUERY = "picture img[src]";
 const DEVIANTART_QUERY = "img[src][fetchpriority='high']"
-
-// SITE2QUERY_MAP = {
-// 	DEVIANTART: DEVIANTART_QUERY,
-// 	ARTSTATION: ARTSTATION_QUERY,
-// 	FLICKR: FLICKR_QUERY
-// }
+const WTG_QUERY = "div[class='site-photo-all'] img[src]"
 
 // Extracts the desired sitename from the current URL
 const VALID_SITES = [
-	INSTAGRAM, FLICKR, ARTSTATION, PINTEREST, DEVIANTART, YOUTUBE
+	INSTAGRAM, FLICKR, ARTSTATION, PINTEREST, DEVIANTART, YOUTUBE, WTG
 ]
 const NAME_REGEX = VALID_SITES.join("|")
 const SITE_NAME_REGEX = new RegExp(`https:\/\/.*(${NAME_REGEX})\..*`)
@@ -123,6 +119,9 @@ function extractImageUrl(siteName) {
 	imgUrl = null
 
 	switch (siteName) {
+		case YOUTUBE:
+			imgUrl = getYoutubeThumbnailUrl()
+			break;
 		case PINTEREST:
 			imgUrl = getLastImageUrl(PINTEREST_QUERY);
 			break;
@@ -138,8 +137,8 @@ function extractImageUrl(siteName) {
 		case DEVIANTART:
 			imgUrl = getFirstImageUrl(DEVIANTART_QUERY);
 			break;
-		case YOUTUBE:
-			imgUrl = getYoutubeThumbnailUrl()
+		case WTG:
+			imgUrl = getFirstImageUrl(WTG_QUERY)
 			break;
 		default:
 			onError(`Unsupported site-name \'${siteName}\'`)

@@ -1,9 +1,9 @@
 {
 	"manifest_version": 2,
 	"name": "Web Image Downloader",
-	"version": "1.1",
+	"version": "1.1.1",
 
-	"description": "Enables images to be downloaded from pages which otherwise prevent (or discourage) downloading. Currently supports: Pinterest, Instagram, Flickr, Artstation, DeviantArt, and YouTube thumbnails",
+	"description": "Enables images to be downloaded from pages which otherwise prevent (or discourage) downloading. Currently supports: Pinterest, Instagram, Flickr, Artstation, DeviantArt, WorldTattooGallery and YouTube thumbnails",
 
 	"icons": {
 		"48": "icons/v2/wid-48.png",
@@ -24,7 +24,8 @@
 				"*://*.pinterest.com/*", "*://*.pinterest.co.uk/*", 
 				"*://*.instagram.com/*",
 				"*://*.deviantart.com/*",
-				"*://*.youtube.com/*"
+				"*://*.youtube.com/*",
+				"*://*.worldtattoogallery.com/*"
 			],
 			"js": ["content_scripts/getsrc_any.js"]
 		}
@@ -34,13 +35,7 @@
 		"downloads",
 		"tabs",
 		"contextMenus",
-		"clipboardWrite",
-		"*://*.pinterest.com/pin/*",
-		"*://*.flickr.com/*",
-		"*://*.instagram.com/*",
-		"*://*.artstation.com/*",
-		"*://*.youtube.com/*",
-		"*://*.deviantart.com/*"
+		"clipboardWrite"
 	],
 
 	"browser_specific_settings": {
