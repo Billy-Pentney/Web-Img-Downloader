@@ -20,7 +20,7 @@ const FLICKR_QUERY = "img[class='main-photo']";
 const ARTSTATION_QUERY = "picture img[src]";
 const DEVIANTART_QUERY = "img[src][fetchpriority='high']"
 const WTG_QUERY = "div[class='site-photo-all'] img[src]"
-const ALIEXPRESS_QUERY = "div.magnifier--wrap--cF4cafd > img"
+const ALIEXPRESS_QUERY = "div[class^='magnifier--wrap--'] > img"
 
 // Extracts the desired sitename from the current URL
 const VALID_SITES = [
