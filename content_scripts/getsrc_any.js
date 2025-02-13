@@ -11,6 +11,7 @@ const ARTSTATION = 'artstation'
 const DEVIANTART = 'deviantart'
 const YOUTUBE = 'youtube'
 const WTG = 'worldtattoogallery'
+const ALIEXPRESS = 'aliexpress'
 
 const PINTEREST_QUERY = "div[data-test-id='closeup-container'] div > img[src][alt]";
 const INSTAGRAM_QUERY = "div[style^='padding'] > img[src]";
@@ -19,10 +20,11 @@ const FLICKR_QUERY = "img[class='main-photo']";
 const ARTSTATION_QUERY = "picture img[src]";
 const DEVIANTART_QUERY = "img[src][fetchpriority='high']"
 const WTG_QUERY = "div[class='site-photo-all'] img[src]"
+const ALIEXPRESS_QUERY = "div.magnifier--wrap--cF4cafd > img"
 
 // Extracts the desired sitename from the current URL
 const VALID_SITES = [
-	INSTAGRAM, FLICKR, ARTSTATION, PINTEREST, DEVIANTART, YOUTUBE, WTG
+	INSTAGRAM, FLICKR, ARTSTATION, PINTEREST, DEVIANTART, YOUTUBE, WTG, ALIEXPRESS
 ]
 const NAME_REGEX = VALID_SITES.join("|")
 const SITE_NAME_REGEX = new RegExp(`https:\/\/.*(${NAME_REGEX})\..*`)
@@ -139,6 +141,9 @@ function extractImageUrl(siteName) {
 			break;
 		case WTG:
 			imgUrl = getFirstImageUrl(WTG_QUERY)
+			break;
+		case ALIEXPRESS:
+			imgUrl = getFirstImageUrl(ALIEXPRESS_QUERY)
 			break;
 		default:
 			onError(`Unsupported site-name \'${siteName}\'`)

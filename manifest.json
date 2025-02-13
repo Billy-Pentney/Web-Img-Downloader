@@ -25,7 +25,8 @@
 				"*://*.instagram.com/*",
 				"*://*.deviantart.com/*",
 				"*://*.youtube.com/*",
-				"*://*.worldtattoogallery.com/*"
+				"*://*.worldtattoogallery.com/*",
+				"*://*.aliexpress.com/item/*"
 			],
 			"js": ["content_scripts/getsrc_any.js"]
 		}
