@@ -3,3 +3,4 @@ web-ext-artifacts/*
 .amo-upload-uuid
 package-lock.json
 package.json
+*.zip
