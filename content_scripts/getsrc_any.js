@@ -4,30 +4,30 @@ const TAG = "IMG_EXTRACTOR"
 
 
 
-const PINTEREST = 'pinterest'
-const INSTAGRAM = 'instagram'
-const FLICKR = 'flickr'
-const ARTSTATION = 'artstation'
-const DEVIANTART = 'deviantart'
-const YOUTUBE = 'youtube'
-const WTG = 'worldtattoogallery'
-const ALIEXPRESS = 'aliexpress'
+const PINTEREST = 'pinterest';
+const INSTAGRAM = 'instagram';
+const FLICKR = 'flickr';
+const ARTSTATION = 'artstation';
+const DEVIANTART = 'deviantart';
+const YOUTUBE = 'youtube';
+const WTG = 'worldtattoogallery';
+const ALIEXPRESS = 'aliexpress';
 
-const PINTEREST_QUERY = "div[data-test-id='closeup-container'] div > img[src][alt]";
+const PINTEREST_QUERY = "div[data-test-id='closeup-container'] div > img[src][alt], img[elementtiming='closeupImage']";
 const INSTAGRAM_QUERY = "div[style^='padding'] > img[src]";
-const INSTAG_REEL_THUMB_QUERY = "div:not([id='splash-screen']) > img[src]"
+const INSTAG_REEL_THUMB_QUERY = "div:not([id='splash-screen']) > img[src]";
 const FLICKR_QUERY = "img[class='main-photo']";
 const ARTSTATION_QUERY = "picture img[src]";
-const DEVIANTART_QUERY = "img[src][fetchpriority='high']"
-const WTG_QUERY = "div[class='site-photo-all'] img[src]"
-const ALIEXPRESS_QUERY = "div[class^='magnifier--wrap--'] > img"
+const DEVIANTART_QUERY = "img[src][fetchpriority='high']";
+const WTG_QUERY = "div[class='site-photo-all'] img[src]";
+const ALIEXPRESS_QUERY = "div[class^='magnifier--wrap--'] > img";
 
 // Extracts the desired sitename from the current URL
 const VALID_SITES = [
 	INSTAGRAM, FLICKR, ARTSTATION, PINTEREST, DEVIANTART, YOUTUBE, WTG, ALIEXPRESS
 ]
 const NAME_REGEX = VALID_SITES.join("|")
-const SITE_NAME_REGEX = new RegExp(`https:\/\/.*(${NAME_REGEX})\..*`)
+const SITE_NAME_REGEX = new RegExp(`https:\/\/.*(${NAME_REGEX})\.[a-z.]\..*`)
 
 
 function log(m) {
